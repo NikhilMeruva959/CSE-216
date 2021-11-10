@@ -1,11 +1,11 @@
-import java.util.*;
+import java.util.List;
 
 public class Triangle implements TwoDShape, Positionable {
 
     List<TwoDPoint> vertices;
 
     public Triangle(List<TwoDPoint> vertices) {
-        this.vertices = vertices;
+        // TODO
     }
 
     /**
@@ -18,18 +18,7 @@ public class Triangle implements TwoDShape, Positionable {
      */
     @Override
     public void setPosition(List<? extends Point> points) {
-        double[] firstThree = new double[3];
-
-        Point arr = points.get(0);
-        double[] coor = arr.coordinates();
-
-        firstThree[0] = coor[0];
-        firstThree[1] = coor[1];
-        firstThree[2] = coor[2];
-
-        List<TwoDPoint> newVert = new ArrayList<>();
-        newVert.add(firstThree[0]);
-
+        // TODO
     }
 
     /**
