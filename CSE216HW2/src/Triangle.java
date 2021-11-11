@@ -5,7 +5,7 @@ public class Triangle implements TwoDShape, Positionable {
     List<TwoDPoint> vertices;
 
     public Triangle(List<TwoDPoint> vertices) {
-        // TODO
+        this.vertices = vertices;
     }
 
     /**
@@ -69,13 +69,40 @@ public class Triangle implements TwoDShape, Positionable {
      * @return the area of this triangle
      */
     public double area() {
-        return 0; // TODO
+        TwoDPoint p1 = vertices.get(0),
+                  p2 = vertices.get(1),
+                  p3 = vertices.get(2);
+
+        double  a = p1.distance(p2),
+                b = p2.distance(p3),
+                c = p1.distance(p3);
+
+        double s = perimeter() / 2;
+        return Math.sqrt(s*(s-a)*(s-b)*(s-c));
     }
 
     /**
      * @return the perimeter (i.e., the total length of the boundary) of this triangle
      */
     public double perimeter() {
-        return 0; // TODO
+        TwoDPoint p1 = vertices.get(0),
+                  p2 = vertices.get(1),
+                  p3 = vertices.get(2);
+
+        double  a = p1.distance(p2),
+                b = p2.distance(p3),
+                c = p1.distance(p3);
+
+        return a+b+c;
+    }
+
+    public TwoDPoint getLeastXVertex() {
+        TwoDPoint p1 = vertices.get(0),
+                  p2 = vertices.get(1),
+                  p3 = vertices.get(2);
+
+        TwoDPoint min = p1.coordinates()[0] <= p2.coordinates()[0] ? p1 : p2;
+        min = min.coordinates()[0] <= p3.coordinates()[0] ? min : p3;
+        return min;
     }
 }

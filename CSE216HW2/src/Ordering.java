@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Ordering {
 
@@ -12,12 +10,16 @@ public class Ordering {
 
         @Override
         public int compare(TwoDShape o1, TwoDShape o2) {
-            return 0; // TODO
+            TwoDPoint p1 = o1.numSides() == 3 ? ((Triangle) o1).getLeastXVertex() : (o1.numSides() == 4 ? ((Quadrilateral) o1).getLeastXVertex() : ((Circle) o1).getLeastXVertex()),
+                      p2 = o1.numSides() == 3 ? ((Triangle) o1).getLeastXVertex() : (o1.numSides() == 4 ? ((Quadrilateral) o1).getLeastXVertex() : ((Circle) o1).getLeastXVertex());
+            double x1 = p1.coordinates()[0],
+                    x2 = p2.coordinates()[0];
+            return x1 == x2 ? 0 : (x1 < x2 ? 1 : -1);
         }
     }
 
     // TODO: There's a lot wrong with this method. correct it so that it can work properly with generics.
-    static <T> void copy(List<TwoDShape> source, List<TwoDShape> destination) {
+    static <T> void copy(ArrayList<Circle> source, List<TwoDShape> destination) {
         destination.addAll(source);
     }
 
@@ -36,15 +38,13 @@ public class Ordering {
         /* uncomment the following block and fill in the "..." constructors to create actual instances. If your
          * implementations are correct, then the code should compile and yield the expected results of the various
          * shapes being ordered by their smallest x-coordinate, area, volume, surface area, etc. */
-        List<Circle> cmu = new ArrayList<>();
 
-        cmu.add(new Circle(5, 10, 1.5));
-        System.out.println(cmu.get(0).getCenter());
 
-        /*
-        shapes.add(new Circle(...));
-        shapes.add(new Triangle(...));
-        shapes.add(new Quadrilateral(...));
+
+        shapes.add(new Circle(0.0, 0.0, 4.0));
+        shapes.add(new Triangle(Arrays.asList(new TwoDPoint(0.0, 0.0), new TwoDPoint(1.0, 1.0), new TwoDPoint(1.0, 0.0))));
+        shapes.add(new Quadrilateral(Arrays.asList(new TwoDPoint(0.0, 0.0), new TwoDPoint(0.0, 1.0), new TwoDPoint(1.0, 1.0), new TwoDPoint(1.0, 0.0))));
+
 
         copy(new ArrayList<Circle>(), shapes); // note-1 //
 
@@ -56,7 +56,7 @@ public class Ordering {
         // TODO: Implement a static nested class so that uncommenting the following line works. The XLocationPointComparator must sort all the points in a collection in increasing order of their x-values.
         // points.sort(new XLocationPointComparator());
         Collections.sort(points); // TODO: Must sort the points in increasing order of their distance from the origin
-         */
+
 
         /* ====== SECTION 2 ====== */
         /* if your changes to copy() are correct, uncommenting the following block will also work as expected note that

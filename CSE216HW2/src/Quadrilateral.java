@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 
 public class Quadrilateral implements TwoDShape, Positionable {
@@ -5,7 +6,7 @@ public class Quadrilateral implements TwoDShape, Positionable {
     List<TwoDPoint> vertices;
 
     public Quadrilateral(List<TwoDPoint> vertices) {
-        // TODO
+        this.vertices = vertices;
     }
 
     /**
@@ -69,13 +70,43 @@ public class Quadrilateral implements TwoDShape, Positionable {
      * @return the area of this quadrilateral
      */
     public double area() {
-        return 0; // TODO
+        TwoDPoint p1 = vertices.get(0),
+                  p2 = vertices.get(1),
+                  p3 = vertices.get(2),
+                  p4 = vertices.get(3);
+
+        Triangle t1 = new Triangle(Arrays.asList(new TwoDPoint[]{p1, p2, p3})),
+                 t2 = new Triangle(Arrays.asList(new TwoDPoint[]{p1, p3, p4}));
+
+        return t1.area() + t2.area();
     }
 
     /**
      * @return the perimeter (i.e., the total length of the boundary) of this quadrilateral
      */
     public double perimeter() {
-        return 0; // TODO
+        TwoDPoint p1 = vertices.get(0),
+                  p2 = vertices.get(1),
+                  p3 = vertices.get(2),
+                  p4 = vertices.get(3);
+
+        double  a = p1.distance(p2),
+                b = p2.distance(p3),
+                c = p3.distance(p4),
+                d = p4.distance(p1);
+
+        return a+b+c+d;
+    }
+
+    public TwoDPoint getLeastXVertex() {
+        TwoDPoint p1 = vertices.get(0),
+                  p2 = vertices.get(1),
+                  p3 = vertices.get(2),
+                  p4 = vertices.get(3);
+
+        TwoDPoint min = p1.coordinates()[0] <= p2.coordinates()[0] ? p1 : p2;
+        min = min.coordinates()[0] <= p3.coordinates()[0] ? min : p3;
+        min = min.coordinates()[0] <= p4.coordinates()[0] ? min : p4;
+        return min;
     }
 }
