@@ -6,12 +6,12 @@ public class Ordering {
      * A comparator for two-dimensional shapes, based on the vertex with the least x-value. That is, sorting with this
      * comparator must order all the shapes in a collection in increasing order of their least x-valued vertex.
      */
-     static class XLocationShapeComparator implements Comparator<TwoDShape> {
+    static class XLocationShapeComparator implements Comparator<TwoDShape> {
 
         @Override
         public int compare(TwoDShape o1, TwoDShape o2) {
             TwoDPoint p1 = o1.numSides() == 3 ? ((Triangle) o1).getLeastXVertex() : (o1.numSides() == 4 ? ((Quadrilateral) o1).getLeastXVertex() : ((Circle) o1).getLeastXVertex()),
-                      p2 = o1.numSides() == 3 ? ((Triangle) o1).getLeastXVertex() : (o1.numSides() == 4 ? ((Quadrilateral) o1).getLeastXVertex() : ((Circle) o1).getLeastXVertex());
+                    p2 = o1.numSides() == 3 ? ((Triangle) o1).getLeastXVertex() : (o1.numSides() == 4 ? ((Quadrilateral) o1).getLeastXVertex() : ((Circle) o1).getLeastXVertex());
             double x1 = p1.coordinates()[0],
                     x2 = p2.coordinates()[0];
             return x1 == x2 ? 0 : (x1 < x2 ? 1 : -1);
@@ -26,7 +26,6 @@ public class Ordering {
         }
     }
 
-    // TODO: There's a lot wrong with this method. correct it so that it can work properly with generics.
     static <S extends T, T> void copy(Collection<S> destination, Collection<T> source) {
         destination.addAll((Collection<S>) source);
     }
@@ -45,7 +44,6 @@ public class Ordering {
         /* uncomment the following block and fill in the "..." constructors to create actual instances. If your
          * implementations are correct, then the code should compile and yield the expected results of the various
          * shapes being ordered by their smallest x-coordinate, area, volume, surface area, etc. */
-
 
 
         shapes.add(new Circle(0.0, 0.0, 4.0));
@@ -71,10 +69,10 @@ public class Ordering {
          * lines commented with 'note-2', 'note-3', and 'note-4' below. */
 
 
-        List<Number>       numbers   = new ArrayList<>();
-        List<Double>       doubles   = new ArrayList<>();
-        Set<Triangle>      triangles = new HashSet<>();
-        Set<Quadrilateral> quads     = new LinkedHashSet<>();
+        List<Number> numbers = new ArrayList<>();
+        List<Double> doubles = new ArrayList<>();
+        Set<Triangle> triangles = new HashSet<>();
+        Set<Quadrilateral> quads = new LinkedHashSet<>();
 
         copy(doubles, numbers); // note-2 //
         copy(quads, shapes);   // note-3 //
@@ -105,21 +103,20 @@ public class Ordering {
     }
 
 
-
-
     // TODO: There's a lot wrong with this method. correct it so that it can work properly with SECTION 3 of the main method written above.
     // NOTE: This method may compile after you implement just one thing, but pay attention to the warnings in your IDE.
     // Just because the method compiles doesn't mean it is fully correct.
+
     /**
      * This method prints each element of a list of various types of two-dimensional shapes (i.e., {@link TwoDShape}, as
      * defined in the {@link Printer<TwoDShape>#print} method. When the printing process is complete, it returns the
      * least instance, as per the natural order of the {@link TwoDShape} instances. SECTION 1 in the main method above
      * defines this natural order.
-     *
+     * <p>
      * Note that the natural ordering of shapes is not provided to you. This is something you must implement as part of
      * the assignment.
      *
-     * @param aList the list of provided two-dimensional shape instances
+     * @param aList    the list of provided two-dimensional shape instances
      * @param aPrinter the specified printer instance
      * @return the least element from <code>aList</code>, as per the natural ordering of the shapes
      */

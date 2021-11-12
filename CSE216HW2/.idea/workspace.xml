@@ -3,14 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a81a822f-0fbe-4d94-b015-85771dd6e853" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE216HW2/Circle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE216HW2/Circle.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CSE216HW2/Ordering.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE216HW2/Ordering.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE216HW2/Positionable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE216HW2/Positionable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE216HW2/Triangle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE216HW2/Triangle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Circle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSE216HW2/TwoDPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE216HW2/TwoDPoint.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Ordering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ordering.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Positionable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Positionable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Quadrilateral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Quadrilateral.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ThreeDPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ThreeDPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Triangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TwoDPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TwoDPoint.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

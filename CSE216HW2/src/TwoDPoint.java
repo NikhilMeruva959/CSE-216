@@ -21,11 +21,10 @@ public class TwoDPoint implements Point {
     @Override
     public double[] coordinates() {
         return new double[]{this.x, this.y};
-        //int[] x = {1,2,3,4};
     }
 
     public double distance(TwoDPoint p) {
-        return Math.sqrt((this.x  - p.x) * (this.x  - p.x) + (this.y  - p.y) * (this.y  - p.y));
+        return Math.sqrt((this.x - p.x) * (this.x - p.x) + (this.y - p.y) * (this.y - p.y));
     }
 
     /**
@@ -41,7 +40,7 @@ public class TwoDPoint implements Point {
         if (coordinates.length % 2 != 0) throw new Exception(IllegalArgumentException);
         List<TwoDPoint> points = new ArrayList<TwoDPoint>();
         for (int i = 0; i < coordinates.length; i += 2) {
-            points.add(new TwoDPoint(coordinates[i], coordinates[i+1]));
+            points.add(new TwoDPoint(coordinates[i], coordinates[i + 1]));
         }
         return points;
     }

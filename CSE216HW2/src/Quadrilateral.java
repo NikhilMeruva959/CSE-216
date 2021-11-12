@@ -1,12 +1,43 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Quadrilateral implements TwoDShape, Positionable {
 
     List<TwoDPoint> vertices;
+    private static Exception IllegalArgumentException;
 
     public Quadrilateral(List<TwoDPoint> vertices) {
         this.vertices = vertices;
+    }
+
+    private List<TwoDPoint> sortLowVertQuad(List<TwoDPoint> newVert) {
+        TwoDPoint low = newVert.get(0);
+        for (int i = 1; i < newVert.size() ; i++) {
+            if(low.coordinates()[0] < newVert.get(i).coordinates()[0] && low.coordinates()[0] != newVert.get(i).coordinates()[0]) {
+                low = newVert.get(i);
+            }
+            else if(low.coordinates()[0] == newVert.get(i).coordinates()[0]){
+                if(low.coordinates()[1] < newVert.get(i).coordinates()[1])
+                    low = newVert.get(i);
+            }
+        }
+
+        double lowest = newVert.get(0).coordinates()[0];
+
+        int startingPos = Arrays.asList(newVert).indexOf(lowest);
+        List<TwoDPoint> temp = new ArrayList<TwoDPoint>();
+
+        int bound = 0;
+
+        while (bound == 4) {
+            for (int i = startingPos; i < newVert.size(); i++) {
+                temp.add(newVert.get(i));
+                bound++;
+                if(i==3) i=0;
+            }
+        }
+        return temp;
     }
 
     /**
@@ -18,8 +49,16 @@ public class Quadrilateral implements TwoDShape, Positionable {
      * @param points the specified list of points.
      */
     @Override
-    public void setPosition(List<? extends Point> points) {
-        // TODO
+    public void setPosition(List<? extends Point> points) throws Exception {
+        if (points.size() >= 4 || !(points.get(0) instanceof TwoDPoint)) throw new Exception(IllegalArgumentException);
+
+        List<TwoDPoint> newVert = new ArrayList<TwoDPoint>();
+        newVert.add((TwoDPoint) points.get(0));
+        newVert.add((TwoDPoint) points.get(1));
+        newVert.add((TwoDPoint) points.get(2));
+        newVert.add((TwoDPoint) points.get(3));
+
+        vertices = sortLowVertQuad(newVert);
     }
 
     /**
@@ -31,7 +70,7 @@ public class Quadrilateral implements TwoDShape, Positionable {
      */
     @Override
     public List<? extends Point> getPosition() {
-        return null; // TODO
+        return sortLowVertQuad(vertices);
     }
 
     /**
@@ -52,7 +91,15 @@ public class Quadrilateral implements TwoDShape, Positionable {
      */
     @Override
     public boolean isMember(List<? extends Point> vertices) {
-        return false; // TODO
+        if((vertices.get(0).coordinates()).equals((vertices.get(1).coordinates())) &&
+                (vertices.get(0).coordinates()).equals((vertices.get(2).coordinates()))&&
+                (vertices.get(0).coordinates()).equals((vertices.get(3).coordinates()))&&
+                (vertices.get(1).coordinates()).equals((vertices.get(2).coordinates()))&&
+                (vertices.get(1).coordinates()).equals((vertices.get(3).coordinates()))&&
+                (vertices.get(2).coordinates()).equals((vertices.get(3).coordinates()))){
+            return false;
+        }
+        else return true;
     }
 
     /**
@@ -63,7 +110,12 @@ public class Quadrilateral implements TwoDShape, Positionable {
      * Snapping is an in-place procedure, and the current instance is modified.
      */
     public void snap() {
-        // TODO
+        List<TwoDPoint> temp = new ArrayList<TwoDPoint>();
+        for (int i = 0; i < vertices.size(); i++) {
+            TwoDPoint x = new TwoDPoint(Math.round(vertices.get(i).coordinates()[0]), Math.round(vertices.get(i).coordinates()[1]));
+            temp.add(x);
+        }
+        if(isMember(temp)) vertices = temp;
     }
 
     /**
