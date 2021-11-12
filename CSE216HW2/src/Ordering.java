@@ -6,7 +6,7 @@ public class Ordering {
      * A comparator for two-dimensional shapes, based on the vertex with the least x-value. That is, sorting with this
      * comparator must order all the shapes in a collection in increasing order of their least x-valued vertex.
      */
-    static class XLocationShapeComparator implements Comparator<TwoDShape> {
+     static class XLocationShapeComparator implements Comparator<TwoDShape> {
 
         @Override
         public int compare(TwoDShape o1, TwoDShape o2) {
@@ -18,11 +18,18 @@ public class Ordering {
         }
     }
 
-    // TODO: There's a lot wrong with this method. correct it so that it can work properly with generics.
-    static <T> void copy(ArrayList<Circle> source, List<TwoDShape> destination) {
-        destination.addAll(source);
+    static class XLocationPointComparator implements Comparator<TwoDPoint> {
+
+        @Override
+        public int compare(TwoDPoint x, TwoDPoint y) {
+            return x.coordinates()[0] == y.coordinates()[0] ? 0 : (x.coordinates()[0] < y.coordinates()[0] ? 1 : -1);
+        }
     }
 
+    // TODO: There's a lot wrong with this method. correct it so that it can work properly with generics.
+    static <S extends T, T> void copy(Collection<S> destination, Collection<T> source) {
+        destination.addAll((Collection<S>) source);
+    }
 
     /**
      * PLEASE READ ALL THE COMMENTS IN THIS CODE CAREFULLY BEFORE YOU START WRITING YOUR OWN CODE.
@@ -31,8 +38,8 @@ public class Ordering {
 
         /* ====== Any additional code you write to create instances or call methods, must be above this line ====== */
         // TODO: The following two lines are using the raw type. Equip them with the proper parameters so that they work with the remainder of the code that follows.
-        List shapes = new ArrayList();
-        List points = new ArrayList();
+        ArrayList<TwoDShape> shapes = new ArrayList<TwoDShape>();
+        ArrayList<TwoDPoint> points = new ArrayList<TwoDPoint>();
 
         /* ====== SECTION 1 ====== */
         /* uncomment the following block and fill in the "..." constructors to create actual instances. If your
@@ -50,12 +57,12 @@ public class Ordering {
 
         // sorting 2d shapes according to various criteria
         shapes.sort(new XLocationShapeComparator());
-        Collections.sort(shapes); // TODO: Must sort the two-dimensional shapes in increasing of their area
+        Collections.sort(shapes, new XLocationShapeComparator()); // TODO: Must sort the two-dimensional shapes in increasing of their area
 
         // sorting 2d points according to various criteria
         // TODO: Implement a static nested class so that uncommenting the following line works. The XLocationPointComparator must sort all the points in a collection in increasing order of their x-values.
-        // points.sort(new XLocationPointComparator());
-        Collections.sort(points); // TODO: Must sort the points in increasing order of their distance from the origin
+        points.sort(new XLocationPointComparator());
+        Collections.sort(points, new XLocationPointComparator()); // TODO: Must sort the points in increasing order of their distance from the origin
 
 
         /* ====== SECTION 2 ====== */
@@ -63,7 +70,7 @@ public class Ordering {
          * copy() should work for the line commented with 'note-1' above while at the same time also working with the
          * lines commented with 'note-2', 'note-3', and 'note-4' below. */
 
-        /*
+
         List<Number>       numbers   = new ArrayList<>();
         List<Double>       doubles   = new ArrayList<>();
         Set<Triangle>      triangles = new HashSet<>();
@@ -72,7 +79,6 @@ public class Ordering {
         copy(doubles, numbers); // note-2 //
         copy(quads, shapes);   // note-3 //
         copy(triangles, shapes); // note-4 //
-         */
 
         /* ====== SECTION 3 ====== */
         /* uncomment the following lines of code and fill in the "..." constructors to create actual instances. You may
@@ -91,12 +97,15 @@ public class Ordering {
          * you may safely assume that no test input will be used in grading where a vertex has more than two decimal places.
          */
 
-        /*List<TwoDShape> lst = new ArrayList<>();
-        lst.add(new Circle(...));
-        lst.add(new Triangle(...));
+        List<TwoDShape> lst = new ArrayList<>();
+        lst.add(new Circle(0.0, 0.0, 4.0));
+        lst.add(new Triangle(Arrays.asList(new TwoDPoint(0.0, 0.0), new TwoDPoint(1.0, 1.0), new TwoDPoint(1.0, 0.0))));
         printAllAndReturnLeast(lst, new Printer());
-         */
+
     }
+
+
+
 
     // TODO: There's a lot wrong with this method. correct it so that it can work properly with SECTION 3 of the main method written above.
     // NOTE: This method may compile after you implement just one thing, but pay attention to the warnings in your IDE.
@@ -114,13 +123,16 @@ public class Ordering {
      * @param aPrinter the specified printer instance
      * @return the least element from <code>aList</code>, as per the natural ordering of the shapes
      */
-//    static Object printAllAndReturnLeast(List aList, AbstractPrinter aPrinter) {
-//        Object least = aList.get(0);
-//        for (Object t : aList) {
-//            if (least.compareTo(t) > 0)
+    static TwoDShape printAllAndReturnLeast(List<TwoDShape> aList, AbstractPrinter aPrinter) {
+        TwoDShape least = aList.get(0);
+        XLocationShapeComparator shapeComparator = new XLocationShapeComparator();
+        for (TwoDShape t : aList) {
+//            if (least.compareTo(t) > 0) //two d array
 //                least = t;
-//            aPrinter.print(t);
-//        }
-//        return least;
-//    }
+            if (shapeComparator.compare(least, t) > 0)
+                least = t;
+            aPrinter.print(t);
+        }
+        return least;
+    }
 }

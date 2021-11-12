@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Triangle implements TwoDShape, Positionable {
@@ -18,7 +20,28 @@ public class Triangle implements TwoDShape, Positionable {
      */
     @Override
     public void setPosition(List<? extends Point> points) {
-        // TODO
+        List<TwoDPoint> newVert = new ArrayList<>();
+        if(points.size()>=3){
+            newVert.add((TwoDPoint) points.get(0));
+            newVert.add((TwoDPoint) points.get(1));
+            newVert.add((TwoDPoint) points.get(2));
+
+            double[][] temp = {((TwoDPoint) points.get(0)).coordinates(), ((TwoDPoint) points.get(1)).coordinates(), ((TwoDPoint) points.get(2)).coordinates()};
+
+            Arrays.sort(temp);
+        }
+
+        double[] firstThree = new double[3];
+
+
+        Point arr = points.get(0);
+        double[] coor = arr.coordinates();
+
+        firstThree[0] = coor[0];
+        firstThree[1] = coor[1];
+        firstThree[2] = coor[2];
+
+        // newVert.add(firstThree[0]);
     }
 
     /**

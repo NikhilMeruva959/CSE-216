@@ -11,7 +11,7 @@ public interface Positionable {
      *
      * @param points the specified list of points.
      */
-    void setPosition(List<? extends Point> points);
+    void setPosition(List<? extends Point> points) throws Exception;
 
     /**
      * Retrieve the position of an object as a list of points.

@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Circle implements TwoDShape, Positionable {
 
     private TwoDPoint center;
     private double    radius;
+    private static Exception IllegalArgumentException;
 
     public Circle(double x, double y, double r) {
         this.center = new TwoDPoint(x, y);
@@ -17,8 +19,9 @@ public class Circle implements TwoDShape, Positionable {
      * @throws IllegalArgumentException if the input does not consist of {@link TwoDPoint} instances
      */
     @Override
-    public void setPosition(List<? extends Point> points) {
-        // TODO
+    public void setPosition(List<? extends Point> points) throws Exception {
+        if(points.size() == 0 || !(points.get(0) instanceof TwoDPoint)) throw new Exception(IllegalArgumentException);
+        this.center =  (TwoDPoint) points.get(0);
     }
 
     /**
@@ -26,7 +29,9 @@ public class Circle implements TwoDShape, Positionable {
      */
     @Override
     public List<? extends Point> getPosition() {
-        return null; // TODO
+        List<TwoDPoint> lst = new ArrayList<TwoDPoint>();
+        lst.add(this.center);
+        return lst;
     }
 
     /**
