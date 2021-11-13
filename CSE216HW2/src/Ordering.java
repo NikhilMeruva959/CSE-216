@@ -6,6 +6,8 @@ public class Ordering {
      * A comparator for two-dimensional shapes, based on the vertex with the least x-value. That is, sorting with this
      * comparator must order all the shapes in a collection in increasing order of their least x-valued vertex.
      */
+
+    // a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
     static class XLocationShapeComparator implements Comparator<TwoDShape> {
 
         @Override
@@ -14,15 +16,15 @@ public class Ordering {
                     p2 = o1.numSides() == 3 ? ((Triangle) o1).getLeastXVertex() : (o1.numSides() == 4 ? ((Quadrilateral) o1).getLeastXVertex() : ((Circle) o1).getLeastXVertex());
             double x1 = p1.coordinates()[0],
                     x2 = p2.coordinates()[0];
-            return x1 == x2 ? 0 : (x1 < x2 ? 1 : -1);
+            return x1 == x2 ? 0 : (x1 < x2 ? -1 : 1);
         }
     }
 
     static class XLocationPointComparator implements Comparator<TwoDPoint> {
 
         @Override
-        public int compare(TwoDPoint x, TwoDPoint y) {
-            return x.coordinates()[0] == y.coordinates()[0] ? 0 : (x.coordinates()[0] < y.coordinates()[0] ? 1 : -1);
+        public int compare(TwoDPoint p1, TwoDPoint p2) {
+            return p1.coordinates()[0] == p2.coordinates()[0] ? 0 : (p1.coordinates()[0] < p2.coordinates()[0] ? -1 : 1);
         }
     }
 
@@ -34,6 +36,13 @@ public class Ordering {
      * PLEASE READ ALL THE COMMENTS IN THIS CODE CAREFULLY BEFORE YOU START WRITING YOUR OWN CODE.
      */
     public static void main(String[] args) {
+
+//        Triangle t = new Triangle(Arrays.asList(new TwoDPoint(1.0, 1.0), new TwoDPoint(0.0, 0.0), new TwoDPoint(1.0, 0.0),new TwoDPoint(5.0, 9.0)));
+//        System.out.println(t);
+//        System.out.println("---------");
+//        t.getPosition();
+//        System.out.println(t);
+//        System.out.println("---------");
 
         /* ====== Any additional code you write to create instances or call methods, must be above this line ====== */
         // TODO: The following two lines are using the raw type. Equip them with the proper parameters so that they work with the remainder of the code that follows.
@@ -67,7 +76,6 @@ public class Ordering {
         /* if your changes to copy() are correct, uncommenting the following block will also work as expected note that
          * copy() should work for the line commented with 'note-1' above while at the same time also working with the
          * lines commented with 'note-2', 'note-3', and 'note-4' below. */
-
 
         List<Number> numbers = new ArrayList<>();
         List<Double> doubles = new ArrayList<>();
@@ -124,8 +132,6 @@ public class Ordering {
         TwoDShape least = aList.get(0);
         XLocationShapeComparator shapeComparator = new XLocationShapeComparator();
         for (TwoDShape t : aList) {
-//            if (least.compareTo(t) > 0) //two d array
-//                least = t;
             if (shapeComparator.compare(least, t) > 0)
                 least = t;
             aPrinter.print(t);

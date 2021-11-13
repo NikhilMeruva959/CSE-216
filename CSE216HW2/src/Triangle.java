@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Triangle implements TwoDShape, Positionable {
@@ -9,33 +10,44 @@ public class Triangle implements TwoDShape, Positionable {
         this.vertices = vertices;
     }
 
-    private List<TwoDPoint> sortLowVert(List<TwoDPoint> newVert) {
-        TwoDPoint low = newVert.get(0);
-        for (int i = 1; i < newVert.size(); i++) {
-            if (low.coordinates()[0] < newVert.get(i).coordinates()[0] && low.coordinates()[0] != newVert.get(i).coordinates()[0]) {
-                low = newVert.get(i);
-            } else if (low.coordinates()[0] == newVert.get(i).coordinates()[0]) {
-                if (low.coordinates()[1] < newVert.get(i).coordinates()[1])
-                    low = newVert.get(i);
-            }
-        }
-
-        double lowest = newVert.get(0).coordinates()[0];
-
-        int startingPos = Arrays.asList(newVert).indexOf(lowest);
-        List<TwoDPoint> temp = new ArrayList<TwoDPoint>();
-
-        int bound = 0;
-
-        while (bound == 3) {
-            for (int i = startingPos; i < newVert.size(); i++) {
-                temp.add(newVert.get(i));
-                bound++;
-                if (i == 2) i = 0;
-            }
-        }
-        return temp;
-    }
+//    private List<TwoDPoint> sortLowVert(List<TwoDPoint> newVert) {
+//        TwoDPoint low = newVert.get(0);
+//        for (int i = 1; i < 3; i++) {
+//            System.out.println(low.coordinates()[0] + " " + newVert.get(i).coordinates()[0]);
+//            if (low.coordinates()[0] > newVert.get(i).coordinates()[0] && low.coordinates()[0] != newVert.get(i).coordinates()[0]) {
+//                low = newVert.get(i);
+//                System.out.println("low coordinates: " + low.coordinates()[0]);
+//                System.out.println(i);
+//            } else if (low.coordinates()[0] == newVert.get(i).coordinates()[0]) {
+//                if (low.coordinates()[1] < newVert.get(i).coordinates()[1])
+//                    low = newVert.get(i);
+//                System.out.println(low.coordinates()[0]);
+//                System.out.println(i);
+//            }
+//        }
+//
+//        double lowest = low.coordinates()[0];
+//        System.out.println("lowest: " +lowest);
+//
+//        int startingPos = newVert.indexOf(low);
+//        System.out.println("starting pos: " + startingPos);
+//
+//        List<TwoDPoint> temp = new ArrayList<TwoDPoint>();
+//
+//        System.out.println(temp);
+//        int bound = 0;
+//
+//        for (int i = startingPos; i < 3; i++) {
+//            if (bound < 3) {
+//                System.out.println("i: " + i);
+//               temp.add(new TwoDPoint(newVert.get(i).coordinates()[0], newVert.get(i).coordinates()[1]));
+//               bound++;
+//               System.out.println(bound);
+//               if (i == 2) i = -1;
+//            }
+//        }
+//        return temp;
+//    }
 
     /**
      * Sets the position of this triangle according to the first three elements in the specified list of points. The
@@ -57,7 +69,10 @@ public class Triangle implements TwoDShape, Positionable {
         newVert.add((TwoDPoint) points.get(1));
         newVert.add((TwoDPoint) points.get(2));
 
-        vertices = sortLowVert(newVert);
+        Collections.sort(newVert, new Ordering.XLocationPointComparator());
+        this.vertices = newVert;
+
+        //vertices = sortLowVert(newVert);
     }
 
     /**
@@ -69,7 +84,8 @@ public class Triangle implements TwoDShape, Positionable {
      */
     @Override
     public List<? extends Point> getPosition() {
-        return sortLowVert(vertices);
+        Collections.sort(this.vertices, new Ordering.XLocationPointComparator());
+        return this.vertices;
     }
 
     /**
@@ -90,12 +106,9 @@ public class Triangle implements TwoDShape, Positionable {
      */
     @Override
     public boolean isMember(List<? extends Point> vertices) {
-
-        if ((vertices.get(0).coordinates()).equals((vertices.get(1).coordinates())) &&
+        return  ((vertices.get(0).coordinates()).equals((vertices.get(1).coordinates())) &&
                 (vertices.get(0).coordinates()).equals((vertices.get(2).coordinates())) &&
-                (vertices.get(1).coordinates()).equals((vertices.get(2).coordinates()))) {
-            return false;
-        } else return true;
+                (vertices.get(1).coordinates()).equals((vertices.get(2).coordinates()))) ? false : true;
     }
 
     /**
@@ -108,11 +121,12 @@ public class Triangle implements TwoDShape, Positionable {
     public void snap() {
         List<TwoDPoint> temp = new ArrayList<TwoDPoint>();
         for (int i = 0; i < vertices.size(); i++) {
-            TwoDPoint x = new TwoDPoint(Math.round(vertices.get(i).coordinates()[0]), Math.round(vertices.get(i).coordinates()[1]));
+            TwoDPoint x = new TwoDPoint((int)Math.round(vertices.get(i).coordinates()[0]), (int)Math.round(vertices.get(i).coordinates()[1]));
             temp.add(x);
         }
         if(isMember(temp)) vertices = temp;
     }
+
 
     /**
      * @return the area of this triangle
@@ -153,5 +167,13 @@ public class Triangle implements TwoDShape, Positionable {
         TwoDPoint min = p1.coordinates()[0] <= p2.coordinates()[0] ? p1 : p2;
         min = min.coordinates()[0] <= p3.coordinates()[0] ? min : p3;
         return min;
+    }
+
+    public String toString() {
+        return "Triangle(" +
+                "p1 = (" + vertices.get(0).coordinates()[0] + ", " + vertices.get(0).coordinates()[1] + "), " +
+                "p2 = (" + vertices.get(1).coordinates()[0] + ", " + vertices.get(1).coordinates()[1] + "), " +
+                "p3 = (" + vertices.get(2).coordinates()[0] + ", " + vertices.get(2).coordinates()[1] + ")" +
+                ")";
     }
 }

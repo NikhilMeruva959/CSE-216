@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Quadrilateral implements TwoDShape, Positionable {
@@ -11,34 +12,34 @@ public class Quadrilateral implements TwoDShape, Positionable {
         this.vertices = vertices;
     }
 
-    private List<TwoDPoint> sortLowVertQuad(List<TwoDPoint> newVert) {
-        TwoDPoint low = newVert.get(0);
-        for (int i = 1; i < newVert.size() ; i++) {
-            if(low.coordinates()[0] < newVert.get(i).coordinates()[0] && low.coordinates()[0] != newVert.get(i).coordinates()[0]) {
-                low = newVert.get(i);
-            }
-            else if(low.coordinates()[0] == newVert.get(i).coordinates()[0]){
-                if(low.coordinates()[1] < newVert.get(i).coordinates()[1])
-                    low = newVert.get(i);
-            }
-        }
-
-        double lowest = newVert.get(0).coordinates()[0];
-
-        int startingPos = Arrays.asList(newVert).indexOf(lowest);
-        List<TwoDPoint> temp = new ArrayList<TwoDPoint>();
-
-        int bound = 0;
-
-        while (bound == 4) {
-            for (int i = startingPos; i < newVert.size(); i++) {
-                temp.add(newVert.get(i));
-                bound++;
-                if(i==3) i=0;
-            }
-        }
-        return temp;
-    }
+//    private List<TwoDPoint> sortLowVertQuad(List<TwoDPoint> newVert) {
+//        TwoDPoint low = newVert.get(0);
+//        for (int i = 1; i < newVert.size() ; i++) {
+//            if(low.coordinates()[0] < newVert.get(i).coordinates()[0] && low.coordinates()[0] != newVert.get(i).coordinates()[0]) {
+//                low = newVert.get(i);
+//            }
+//            else if(low.coordinates()[0] == newVert.get(i).coordinates()[0]){
+//                if(low.coordinates()[1] < newVert.get(i).coordinates()[1])
+//                    low = newVert.get(i);
+//            }
+//        }
+//
+//        double lowest = newVert.get(0).coordinates()[0];
+//
+//        int startingPos = Arrays.asList(newVert).indexOf(lowest);
+//        List<TwoDPoint> temp = new ArrayList<TwoDPoint>();
+//
+//        int bound = 0;
+//
+//        while (bound == 4) {
+//            for (int i = startingPos; i < newVert.size(); i++) {
+//                temp.add(newVert.get(i));
+//                bound++;
+//                if(i==3) i=0;
+//            }
+//        }
+//        return temp;
+//    }
 
     /**
      * Sets the position of this quadrilateral according to the first four elements in the specified list of points. The
@@ -58,7 +59,8 @@ public class Quadrilateral implements TwoDShape, Positionable {
         newVert.add((TwoDPoint) points.get(2));
         newVert.add((TwoDPoint) points.get(3));
 
-        vertices = sortLowVertQuad(newVert);
+        Collections.sort(newVert, new Ordering.XLocationPointComparator());
+        this.vertices = newVert;
     }
 
     /**
@@ -70,7 +72,8 @@ public class Quadrilateral implements TwoDShape, Positionable {
      */
     @Override
     public List<? extends Point> getPosition() {
-        return sortLowVertQuad(vertices);
+        Collections.sort(this.vertices, new Ordering.XLocationPointComparator());
+        return this.vertices;
     }
 
     /**
@@ -112,7 +115,7 @@ public class Quadrilateral implements TwoDShape, Positionable {
     public void snap() {
         List<TwoDPoint> temp = new ArrayList<TwoDPoint>();
         for (int i = 0; i < vertices.size(); i++) {
-            TwoDPoint x = new TwoDPoint(Math.round(vertices.get(i).coordinates()[0]), Math.round(vertices.get(i).coordinates()[1]));
+            TwoDPoint x = new TwoDPoint((int)Math.round(vertices.get(i).coordinates()[0]), (int)Math.round(vertices.get(i).coordinates()[1]));
             temp.add(x);
         }
         if(isMember(temp)) vertices = temp;
@@ -160,5 +163,13 @@ public class Quadrilateral implements TwoDShape, Positionable {
         min = min.coordinates()[0] <= p3.coordinates()[0] ? min : p3;
         min = min.coordinates()[0] <= p4.coordinates()[0] ? min : p4;
         return min;
+    }
+    public String toString() {
+        return "Quadrilaeral(" +
+                "p1 = (" + vertices.get(0).coordinates()[0] + ", " + vertices.get(0).coordinates()[1] + "), " +
+                "p2 = (" + vertices.get(1).coordinates()[0] + ", " + vertices.get(1).coordinates()[1] + "), " +
+                "p3 = (" + vertices.get(2).coordinates()[0] + ", " + vertices.get(2).coordinates()[1] + ")" +
+                "p1 = (" + vertices.get(3).coordinates()[0] + ", " + vertices.get(3).coordinates()[1] + "), " +
+                ")";
     }
 }

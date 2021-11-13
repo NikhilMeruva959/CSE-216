@@ -73,4 +73,8 @@ public class Circle implements TwoDShape, Positionable {
         return this.center;
     }
 
+    public String toString() {
+        return "Circle(x = " + center.coordinates()[0] + ", y = " + center.coordinates()[1] + ", r = " + radius + ")";
+    }
+
 }
