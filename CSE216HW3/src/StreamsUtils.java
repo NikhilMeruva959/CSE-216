@@ -15,19 +15,16 @@ public class StreamsUtils {
     /**
      * Find and return the longest <code>String</code> in a given collection of <code>String</code>s.
      *
-     * @param strings: the given collection of <code>String</code>s.
+     * @param strings:    the given collection of <code>String</code>s.
      * @param from_start: a <code>boolean</code> flag that decides how ties are broken.
-    If <code>true</code>, then the element encountered earlier in
-     * the iteration is returned, otherwise the later element is returned.
+     *                    If <code>true</code>, then the element encountered earlier in
+     *                    the iteration is returned, otherwise the later element is returned.
      * @return the longest <code>String</code> in the given collection,
      * where ties are broken based on <code>from_start</code>.
      */
-    public static String longest(Collection<String> strings, boolean from_start){
-        return strings.stream().forEach(i ->{
-            if (from_start) ;
-            else ;
-        });
-        //return strings.stream().filter(str->Character.isUpperCase(str.charAt(0))).collect(Collectors.toList());
+    public static String longest(Collection<String> strings, boolean from_start) {
+        return (from_start) ? strings.stream().max(Comparator.comparing(str -> str.length())).get() :
+                strings.stream().max(Comparator.comparing(String::length).thenComparing(String::indexOf)).get();
     }
 
     /**
@@ -41,7 +38,11 @@ public class StreamsUtils {
      * @return the least element in <code>items</code>, where ties are
      * broken based on <code>from_start</code>.
      */
-    //   public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start);
+//     public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start) {
+//         return (from_start) ? items.stream().max(Comparator.comparing(x -> x)).get() :
+//                 items.stream().max(Comparator.comparing(T::size).thenComparing(T::indexOf)).get();
+//
+//     }
 
     /**
      * Flattens a map to a stream of <code>String</code>s, where each element in the list
@@ -61,24 +62,30 @@ public class StreamsUtils {
         List<String> str = new ArrayList<String>();
         str.add("Apple");
         str.add("Pinenut");
-        str.add("blueberry");
-        System.out.println(capitalized(str));
+        str.add("tangere");
+        str.add("oatmeal");
+        str.add("funnys");
+        str.add("jokers");
+        str.add("Pinenur");
+        //str.add("blueberry");
+        //System.out.println(capitalized(str));
+        System.out.println(longest(str, true));
 
-        System.out.println();
-        HashMap<Integer, String> hm = new HashMap<Integer, String>();
-        hm.put(1, "Ram");
-        hm.put(2, "Shyam");
-        hm.put(3, "Sita");
+//        System.out.println();
+//        HashMap<Integer, String> hm = new HashMap<Integer, String>();
+//        hm.put(1, "Ram");
+//        hm.put(2, "Shyam");
+//        hm.put(3, "Sita");
 
-        System.out.println((flatten(hm)));
-        System.out.println();
-        System.out.println((flatten(hm)).get(0));
-        System.out.println();
-        System.out.println((flatten(hm)).get(0).substring(1,2));
-        System.out.println();
-        System.out.println((flatten(hm)).get(0).substring(3,4));
-        System.out.println();
-        System.out.println((flatten(hm)).get(0).length());
+//        System.out.println((flatten(hm)));
+//        System.out.println();
+//        System.out.println((flatten(hm)).get(0));
+//        System.out.println();
+//        System.out.println((flatten(hm)).get(0).substring(1, 2));
+//        System.out.println();
+//        System.out.println((flatten(hm)).get(0).substring(3, 4));
+//        System.out.println();
+//        System.out.println((flatten(hm)).get(0).length());
 
 
     }
