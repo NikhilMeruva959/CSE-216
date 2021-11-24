@@ -23,8 +23,9 @@ public class StreamsUtils {
      * where ties are broken based on <code>from_start</code>.
      */
     public static String longest(Collection<String> strings, boolean from_start) {
-        return (from_start) ? strings.stream().max(Comparator.comparing(str -> str.length())).get() :
-                strings.stream().max(Comparator.comparing(String::length).thenComparing(String::indexOf)).get();
+        return (from_start) ? strings.stream().max(Comparator.comparing((String str) -> str.length())).get() :
+                //strings.stream().max(Comparator.comparing((String str) -> str.length()).thenComparing(String::indexOf)).get();
+                strings.stream().max(Comparator.comparing((String str) -> str.length()).thenComparing((String str) -> Arrays.asList(strings.toArray(new String[strings.size()])).indexOf(str))).get();
     }
 
     /**
@@ -38,11 +39,11 @@ public class StreamsUtils {
      * @return the least element in <code>items</code>, where ties are
      * broken based on <code>from_start</code>.
      */
-//     public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start) {
-//         return (from_start) ? items.stream().max(Comparator.comparing(x -> x)).get() :
-//                 items.stream().max(Comparator.comparing(T::size).thenComparing(T::indexOf)).get();
-//
-//     }
+     public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start) {
+         return from_start ? items.stream().min(Comparator.comparing((T x) -> x)).get() :
+                 items.stream().min(Comparator.comparing((T x) -> x).thenComparing((T x) -> Arrays.asList(items.toArray()).indexOf(x))).get();
+
+     }
 
     /**
      * Flattens a map to a stream of <code>String</code>s, where each element in the list
@@ -60,16 +61,28 @@ public class StreamsUtils {
 
     public static void main(String[] args) {
         List<String> str = new ArrayList<String>();
-        str.add("Apple");
-        str.add("Pinenut");
-        str.add("tangere");
-        str.add("oatmeal");
-        str.add("funnys");
-        str.add("jokers");
-        str.add("Pinenur");
+        str.add("a");
+        str.add("aa");
+        str.add("aaa");
+        str.add("bbb");
+        str.add("ccc");
+        str.add("dd");
+        str.add("e");
+
+        System.out.println(longest(str, false));
+
+        List<Integer> y = new ArrayList<Integer>();
+        y.add(12);
+        y.add(23765);
+        y.add(8);
+        y.add(19861);
+        y.add(970);
+        y.add(19091091);
+        y.add(8);
+
         //str.add("blueberry");
         //System.out.println(capitalized(str));
-        System.out.println(longest(str, true));
+        System.out.println(least(y, false));
 
 //        System.out.println();
 //        HashMap<Integer, String> hm = new HashMap<Integer, String>();
