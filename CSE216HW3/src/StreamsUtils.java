@@ -31,19 +31,19 @@ public class StreamsUtils {
     /**
      * Find and return the least element from a collection of given elements that are comparable.
      *
-     * @param items: the given collection of elements
+     * @param items:      the given collection of elements
      * @param from_start: a <code>boolean</code> flag that decides how ties are broken.
-     * If <code>true</code>, the element encountered earlier in the
-     * iteration is returned, otherwise the later element is returned.
-     * @param <T>: the type parameter of the collection (i.e., the items are all of type T).
+     *                    If <code>true</code>, the element encountered earlier in the
+     *                    iteration is returned, otherwise the later element is returned.
+     * @param <T>:        the type parameter of the collection (i.e., the items are all of type T).
      * @return the least element in <code>items</code>, where ties are
      * broken based on <code>from_start</code>.
      */
-     public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start) {
-         return from_start ? items.stream().min(Comparator.comparing((T x) -> x)).get() :
-                 items.stream().min(Comparator.comparing((T x) -> x).thenComparing((T x) -> Arrays.asList(items.toArray()).indexOf(x))).get();
+    public static <T extends Comparable<T>> T least(Collection<T> items, boolean from_start) {
+        return from_start ? items.stream().min(Comparator.comparing((T x) -> x)).get() :
+                items.stream().min(Comparator.comparing((T x) -> x).thenComparing((T x) -> Arrays.asList(items.toArray()).indexOf(x))).get();
 
-     }
+    }
 
     /**
      * Flattens a map to a stream of <code>String</code>s, where each element in the list
@@ -60,29 +60,29 @@ public class StreamsUtils {
     }
 
     public static void main(String[] args) {
-        List<String> str = new ArrayList<String>();
-        str.add("a");
-        str.add("aa");
-        str.add("aaa");
-        str.add("bbb");
-        str.add("ccc");
-        str.add("dd");
-        str.add("e");
-
-        System.out.println(longest(str, false));
-
-        List<Integer> y = new ArrayList<Integer>();
-        y.add(12);
-        y.add(23765);
-        y.add(8);
-        y.add(19861);
-        y.add(970);
-        y.add(19091091);
-        y.add(8);
+//        List<String> str = new ArrayList<String>();
+//        str.add("a");
+//        str.add("aa");
+//        str.add("aaa");
+//        str.add("bbb");
+//        str.add("ccc");
+//        str.add("dd");
+//        str.add("e");
+//
+//        System.out.println(longest(str, false));
+//
+//        List<Integer> y = new ArrayList<Integer>();
+//        y.add(12);
+//        y.add(23765);
+//        y.add(8);
+//        y.add(19861);
+//        y.add(970);
+//        y.add(19091091);
+//        y.add(8);
 
         //str.add("blueberry");
         //System.out.println(capitalized(str));
-        System.out.println(least(y, false));
+//        System.out.println(least(y, false));
 
 //        System.out.println();
 //        HashMap<Integer, String> hm = new HashMap<Integer, String>();
@@ -99,8 +99,6 @@ public class StreamsUtils {
 //        System.out.println((flatten(hm)).get(0).substring(3, 4));
 //        System.out.println();
 //        System.out.println((flatten(hm)).get(0).length());
-
-
     }
 
 }

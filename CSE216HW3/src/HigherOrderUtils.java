@@ -6,7 +6,7 @@ import java.lang.ArithmeticException;
 
 public class HigherOrderUtils {
 
-    interface NamedBiFunction<T,U,R> extends BiFunction<T,U,R> {
+    interface NamedBiFunction<T, U, R> extends BiFunction<T, U, R> {
         public static String name() {
             return "";
         }
@@ -16,6 +16,7 @@ public class HigherOrderUtils {
         if (y == 0) throw new ArithmeticException("Division by Zero");
         return x / y;
     }
+
     // instance of interface
     public static NamedBiFunction<Double, Double, Double> add = (a, b) -> a + b;
     public static NamedBiFunction<Double, Double, Double> subtract = (a, b) -> a - b;
@@ -36,9 +37,9 @@ public class HigherOrderUtils {
      * - index 2: the result of add(6,0) is stored in args[3] to yield args = [1,2,6,6,4]
      * - index 3: the result of divide(6,4) is stored in args[4] to yield args = [1,2,6,6,1.5]
      *
-     * @param args: the arguments over which <code>bifunctions</code> will be applied.
+     * @param args:        the arguments over which <code>bifunctions</code> will be applied.
      * @param bifunctions: the list of bifunctions that will be applied on <code>args</code>.
-     * @param <T>: the type parameter of the arguments (e.g., Integer, Double)
+     * @param <T>:         the type parameter of the arguments (e.g., Integer, Double)
      * @return the item in the last index of <code>args</code>, which has the final
      * result of all the bifunctions being applied in sequence.
      */
@@ -51,8 +52,8 @@ public class HigherOrderUtils {
         if (args.size() == 1)
             return args.get(0);
         for (int i = 1; i < args.size(); i++) {
-            NamedBiFunction<T, T, T> function = bifunctions.get(i-1);
-            T result = function.apply(args.get(i-1), args.get(i));
+            NamedBiFunction<T, T, T> function = bifunctions.get(i - 1);
+            T result = function.apply(args.get(i - 1), args.get(i));
             args.set(i, result);
         }
         return args.get(args.size() - 1);
@@ -65,25 +66,25 @@ public class HigherOrderUtils {
     }
 
     public static void main(String[] args) {
-        List<Double> argList = Arrays.asList(1d, 1d, 3d, 0d, 4d);
-        List<NamedBiFunction<Double, Double, Double>> bfs = Arrays.asList(add, multiply, add, divide);
-        double result = zip(argList, bfs);
-        for(int i=0; i< argList.size(); i++){
-            System.out.print(argList.get(i)+" ");
-        }
-        System.out.println();
-        System.out.println(result);
-
-            System.out.println();
-
-        Function<Character, String> f = c -> new String(new char[Character.getNumericValue(c) - Character.getNumericValue('a') + 1]).replace("\0", "" + c);
-
-        Function<String, Integer> g = s -> s.length();
-
-        Function<Character, Integer> h = FunctionComposition.composition(f, g);
-
-        System.out.println(f.apply('d'));
-        System.out.println(g.apply("abcd"));
-        System.out.println(h.apply('z'));
+//        List<Double> argList = Arrays.asList(1d, 1d, 3d, 0d, 4d);
+//        List<NamedBiFunction<Double, Double, Double>> bfs = Arrays.asList(add, multiply, add, divide);
+//        double result = zip(argList, bfs);
+//        for(int i=0; i< argList.size(); i++){
+//            System.out.print(argList.get(i)+" ");
+//        }
+//        System.out.println();
+//        System.out.println(result);
+//
+//            System.out.println();
+//
+//        Function<Character, String> f = c -> new String(new char[Character.getNumericValue(c) - Character.getNumericValue('a') + 1]).replace("\0", "" + c);
+//
+//        Function<String, Integer> g = s -> s.length();
+//
+//        Function<Character, Integer> h = FunctionComposition.composition(f, g);
+//
+//        System.out.println(f.apply('d'));
+//        System.out.println(g.apply("abcd"));
+//        System.out.println(h.apply('z'));
     }
 }

@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a81a822f-0fbe-4d94-b015-85771dd6e853" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../CSE216HW3/src/HigherOrderUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CSE216HW4/hw4testfile.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CSE216HW4/kaggle-serverlogs/CIDDS-001-external-week1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CSE216HW4/serverattackdetector.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CSE216HW4/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSE216HW3/out/production/CSE216HW3/StreamsUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CSE216HW3/out/production/CSE216HW3/StreamsUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSE216HW2/Ordering.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE216HW2/Ordering.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSE216HW2/Printer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE216HW2/Printer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ordering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ordering.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSE216HW3/out/production/CSE216HW3/HigherOrderUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CSE216HW3/out/production/CSE216HW3/HigherOrderUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSE216HW3/src/HigherOrderUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CSE216HW3/src/HigherOrderUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSE216HW3/src/StreamsUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CSE216HW3/src/StreamsUtils.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,7 +27,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/CSE 216 Project Folder/Java/Practice" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />

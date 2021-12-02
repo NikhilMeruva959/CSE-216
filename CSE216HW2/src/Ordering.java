@@ -36,6 +36,8 @@ public class Ordering {
      * PLEASE READ ALL THE COMMENTS IN THIS CODE CAREFULLY BEFORE YOU START WRITING YOUR OWN CODE.
      */
     public static void main(String[] args) {
+        Triangle.setPosition(Arrays.asList(new TwoDPoint(2, 0), new TwoDPoint(2, 2),new TwoDPoint(0.5, 0.5)));
+
 
 //        Triangle t = new Triangle(Arrays.asList(new TwoDPoint(1.0, 1.0), new TwoDPoint(0.0, 0.0), new TwoDPoint(1.0, 0.0),new TwoDPoint(5.0, 9.0)));
 //        System.out.println(t);
@@ -56,9 +58,10 @@ public class Ordering {
 
 
         shapes.add(new Circle(0.0, 0.0, 4.0));
-        shapes.add(new Triangle(Arrays.asList(new TwoDPoint(0.0, 0.0), new TwoDPoint(1.0, 1.0), new TwoDPoint(1.0, 0.0))));
+        shapes.add(new Triangle(Arrays.asList(new TwoDPoint(2.0, 0.0), new TwoDPoint(2.0, 2.0), new TwoDPoint(.5, .5))));
         shapes.add(new Quadrilateral(Arrays.asList(new TwoDPoint(0.0, 0.0), new TwoDPoint(0.0, 1.0), new TwoDPoint(1.0, 1.0), new TwoDPoint(1.0, 0.0))));
 
+        System.out.println(shapes.get(1));
 
         copy(new ArrayList<Circle>(), shapes); // note-1 //
 
