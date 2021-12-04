@@ -1,4 +1,7 @@
 import csv
+import io
+import datetime
+import os
 
 class ServerAttackDetector:
     
@@ -9,16 +12,63 @@ class ServerAttackDetector:
         print(self._d)
 
     def detect(self):
-        reader = csv.reader(open(self._d),delimiter=',')
-        filtered = filter(lambda p: 'UDP' == p[2] and 'suspicious' == p[12] and p[1] < .001, reader)
-        print(filtered)
-        #csv.writer(open(self._d,'r'),delimiter=' ').writerows(filtered)
+        with open(self._d) as file:
+            #data = file.readlines()
+            reader = csv.reader(file)
+            data = list(reader) 
+        count = 2
+                
+        print("------------------------------------------------------")
+        
+        while count < len(data):
+            print("Count" + str(count))
+            lstTimePrev = data[count-1][0]
+            lstTimeCurr = data[count][0]
 
-        #strippedLine = (line.strip() for line in open(self._d).readline() if line != " ")
+            date_timePrevious_obj = datetime.datetime.strptime(lstTimePrev, '%Y-%m-%d %H:%M:%S.%f')
+            date_timeCurrent_obj = datetime.datetime.strptime(lstTimeCurr, '%Y-%m-%d %H:%M:%S.%f')
+
+            timeDiff = date_timeCurrent_obj-date_timePrevious_obj
+            print("Time: -----------------------------------------------------")
+
+            oneSec = datetime.datetime.strptime('0:00:01.00', '%H:%M:%S.%f')
+
+            print(oneSec)
+            print("TimeDelt: ")
+            print(timeDiff<=datetime.timedelta(seconds=1))
+
+            print(date_timePrevious_obj)
+            print(date_timeCurrent_obj)
+            
+            print("Filtered: -----------------------------------------------------")
+
+            print("||" + data[count][2] + "||")
+            print("||" + data[count][12] + "||")
+            print(float(data[count][1]))
+            print("||" + data[count][2].strip(" ") + "||")
+
+            print(data[count][2].strip(" ") == 'UDP')
+            print(data[count][12].strip(" ") == 'suspicious')
+            print(float(data[count][1]) < .001)
+
+            
+            if(data[count][2].strip(" ") == 'UDP' and data[count][12].strip(" ") == 'suspicious' and float(data[count][1]) < 1.00 and timeDiff<=datetime.timedelta(seconds=1) and data[count-1][2].strip(" ") == 'UDP' and data[count-1][12].strip(" ") == 'suspicious'):
+                yield (count, data[count])
+                break
+            count += 1
 
         
 
 obj = ServerAttackDetector("C:/Users/meruv/CSE 216 HW/CSE216HW4/hw4testfile.csv")
+#obj = ServerAttackDetector("C:/Users/meruv/CSE 216 HW/CSE216HW4/kaggle-serverlogs/CIDDS-001-external-week1.csv")
 obj.display()
 print("--------------")
-obj.detect()
+output = obj.detect()
+for i in output:
+    print((i)[0])
+    print((i)[1])
+
+
+print("--------------")
+
+
