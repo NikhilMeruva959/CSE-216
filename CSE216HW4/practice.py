@@ -46,7 +46,8 @@ class ServerAttackDetector:
         
         #lstCurrTime = data[count][0].split(" ")
         #if(lstTimePrev[0] == lstCurrTime[0] and lstTimePrev[1] - lstCurrTime[1])
-        #print(float(data[count-1][0]) - float(data[count][0]))
+        #print(float(data[count-1][0]) - float(data[count][0]))        
+        
         while count < len(data):
             #prevRow = data[count-1].split(',')
             print("count " + str(count))
